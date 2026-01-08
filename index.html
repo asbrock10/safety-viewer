@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Safety Meeting Viewer</title>
+  <style>
+    /* All the CSS from generateMeetingHTML function */
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    // Decode the ?m= parameter
+    const params = new URLSearchParams(window.location.search);
+    const encoded = params.get('m');
+    
+    if (encoded) {
+      // Decode base64 and parse JSON
+      let base64 = encoded.replace(/-/g, '+').replace(/_/g, '/');
+      while (base64.length % 4) base64 += '=';
+      const json = decodeURIComponent(escape(atob(base64)));
+      const data = JSON.parse(json);
+      
+      // Render the meeting (t=topic, c=content, h=hazards, etc.)
+      document.getElementById('app').innerHTML = `...rendered HTML...`;
+    }
+  </script>
+</body>
+</html>
